@@ -1,0 +1,28 @@
+package(default_visibility = ["//visibility:public"])
+
+filegroup(
+    name = "ncurses-headers",
+    srcs = glob(include=[
+      "include/ncurses/*.h"
+    ]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "ncurses-libs",
+    srcs = glob(include=[
+      "lib/*.so",
+      "lib/*.a",
+    ]),
+    visibility = ["//visibility:public"],
+)
+
+cc_library(
+    name = "ncurses",
+    srcs = [":ncurses-libs"],
+    hdrs = [":ncurses-headers"],
+    visibility = ["//visibility:public"],
+    strip_include_prefix = "include",
+    includes = ["include"],
+    linkstatic = True,
+)
