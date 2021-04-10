@@ -3,7 +3,9 @@ package(default_visibility = ["//visibility:public"])
 filegroup(
     name = "ncurses-headers",
     srcs = glob(include=[
-      "include/ncurses/*.h"
+      "include/ncurses/*.h",
+      "include/ncursesw/*.h",
+      "include/*.h",
     ]),
     visibility = ["//visibility:public"],
 )
@@ -12,6 +14,8 @@ filegroup(
     name = "ncurses-libs",
     srcs = glob(include=[
       "lib/*.so",
+      "lib/*.so.6",
+      "lib/*.so.6.2",
       "lib/*.a",
     ]),
     visibility = ["//visibility:public"],
@@ -23,6 +27,6 @@ cc_library(
     hdrs = [":ncurses-headers"],
     visibility = ["//visibility:public"],
     strip_include_prefix = "include",
-    includes = ["include"],
+    includes = ["include/ncurses", "include/ncursesw"],
     linkstatic = True,
 )
